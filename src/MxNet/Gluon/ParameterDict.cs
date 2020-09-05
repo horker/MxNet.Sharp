@@ -23,13 +23,13 @@ namespace MxNet.Gluon
 {
     public class ParameterDict : IEnumerable<KeyValuePair<string, Parameter>>
     {
-        private readonly Dictionary<string, Parameter> _params;
+        private readonly OrderedDictionary<string, Parameter> _params;
 
         public ParameterDict(string prefix = "", ParameterDict shared = null)
         {
             Prefix = prefix;
             Shared = shared;
-            _params = new Dictionary<string, Parameter>();
+            _params = new OrderedDictionary<string, Parameter>();
         }
 
         public string Prefix { get; }
@@ -72,7 +72,7 @@ namespace MxNet.Gluon
             return _params.Values.ToArray();
         }
 
-        public Dictionary<string, Parameter> Items()
+        public OrderedDictionary<string, Parameter> Items()
         {
             return _params;
         }

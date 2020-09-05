@@ -28,9 +28,9 @@ namespace MxNet.Gluon
 
         public delegate void Hook(Block block, NDArrayOrSymbol input);
 
-        public Dictionary<string, Block> _childrens;
-        internal Dictionary<int, Hook> _forward_hooks;
-        internal Dictionary<int, Hook> _forward_pre_hooks;
+        public OrderedDictionary<string, Block> _childrens;
+        internal OrderedDictionary<int, Hook> _forward_hooks;
+        internal OrderedDictionary<int, Hook> _forward_pre_hooks;
         internal Dictionary<string, Parameter> _reg_params;
 
         internal _BlockScope _scope;
@@ -40,10 +40,10 @@ namespace MxNet.Gluon
             (Prefix, Params) = _BlockScope.Create(prefix, @params, Alias());
             Name = prefix != null && prefix.EndsWith("_") ? prefix.Substring(0, prefix.Length - 1) : prefix;
             _scope = new _BlockScope(this);
-            _childrens = new Dictionary<string, Block>();
+            _childrens = new OrderedDictionary<string, Block>();
             _reg_params = new Dictionary<string, Parameter>();
-            _forward_hooks = new Dictionary<int, Hook>();
-            _forward_pre_hooks = new Dictionary<int, Hook>();
+            _forward_hooks = new OrderedDictionary<int, Hook>();
+            _forward_pre_hooks = new OrderedDictionary<int, Hook>();
         }
 
         public string Prefix { get; set; }
